@@ -7,6 +7,7 @@ require('dotenv').config();
 // const bodyParser = require('body-parser');
 // app.use(bodyParser.json()); //or we can use [app.use(express.json());]
 app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
 app.get('/', (req,res) =>{
     res.send('welcome to my hotel....how can i help you')
@@ -104,7 +105,9 @@ const menuRoutes = require('./routes/menuRoutes');
 // Use the router for menu-related routes
 app.use('/menu', menuRoutes);
 
-const PORT = process.env.PORT || 3000;
+
+
+
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`);
 });
