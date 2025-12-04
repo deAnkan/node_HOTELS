@@ -4,7 +4,7 @@ const app = express()
 const db = require('./db')
 
 app.get('/', (req, res) => {
-  res.send('welcome to my hotel....how can i help you')
+    res.send('welcome to my hotel....how can i help you')
 })
 
 app.get('/biriyani' , (req, res) =>{

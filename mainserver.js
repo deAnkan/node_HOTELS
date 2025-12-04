@@ -3,6 +3,7 @@ const app = express();
 const db = require('./db');
 const Person = require('./Models/person');
 const Menuitem = require('./Models/Menuitem');
+require('dotenv').config();
 // const bodyParser = require('body-parser');
 // app.use(bodyParser.json()); //or we can use [app.use(express.json());]
 app.use(express.json());
@@ -103,6 +104,7 @@ const menuRoutes = require('./routes/menuRoutes');
 // Use the router for menu-related routes
 app.use('/menu', menuRoutes);
 
-app.listen(3000, ()=>{
-    console.log('listening on port 3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, ()=>{
+    console.log(`listening on port ${PORT}`);
 });

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 // define the mongodb connection url
-const mongoURL = 'mongodb+srv://ankan_d:ankan123@cluster0.okuhrgc.mongodb.net/hotels'
-
+// const mongoURL = 'mongodb://localhost:27017/hotels';
+const mongoURL = 'mongodb+srv://ankan_d:ankan001@cluster0.fwbrchy.mongodb.net/';
 mongoose.connect(mongoURL);
 
 // get the default connection
@@ -23,6 +23,7 @@ db.on('error', (err)=>{
 db.on('disconnected', ()=>{
     console.log('disconnected from mongoDb server');
 })
+
 
 // export the database connections
 module.exports = db;
