@@ -64,10 +64,10 @@
 // const jsonObject = JSON.parse(jsonString);
 // console.log(jsonObject);
 
-const jsonObject = {name: 'Ankan', age: 22};
-const jsonString = JSON.stringify(jsonObject);
-console.log(jsonString);
-console.log(typeof jsonString);
-console.log(typeof jsonObject);
+// const jsonObject = {name: 'Ankan', age: 22};
+// const jsonString = JSON.stringify(jsonObject);
+// console.log(jsonString);
+// console.log(typeof jsonString);
+// console.log(typeof jsonObject);
 
 
