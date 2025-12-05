@@ -4,9 +4,14 @@ const db = require('./db');
 const Person = require('./Models/person');
 const Menuitem = require('./Models/Menuitem');
 require('dotenv').config();
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
+
 // const bodyParser = require('body-parser');
 // app.use(bodyParser.json()); //or we can use [app.use(express.json());]
 app.use(express.json());
+
 const PORT = process.env.PORT || 3000;
 
 // Middleware Function
@@ -14,8 +19,9 @@ const logRequest = (req, res, next) => {
     console.log(`[${new Date().toLocaleString()}] Request Made to : ${req.originalUrl}`);
     next(); //Move on to the next phase
 }
-
 app.use(logRequest);
+
+
 
 app.get('/', (req,res) =>{
     res.send('welcome to my hotel....how can i help you')
