@@ -9,6 +9,14 @@ require('dotenv').config();
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
+// Middleware Function
+const logRequest = (req, res, next) => {
+    console.log(`[${new Date().toLocaleString()}] Request Made to : ${req.originalUrl}`);
+    next(); //Move on to the next phase
+}
+
+app.use(logRequest);
+
 app.get('/', (req,res) =>{
     res.send('welcome to my hotel....how can i help you')
 })
