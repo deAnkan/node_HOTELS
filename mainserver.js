@@ -89,7 +89,7 @@ app.get('/menu',async (req,res)=>{
 app.get('/person/:workType', async (req,res)=>{
     try{
         const workType = req.params.workType;
-        if(workType=='chef' || workType=='waiter' || workType=='manager' || workType=='cleaner'){
+        if(workType=='chef' || workType=='waiter' || workType=='manager' || workType=='cleaner' || workType=='assistant manager'){
             const response = await Person.find({work: workType});
             console.log('Data Fetched Successfully');
             res.status(200).json(response);
