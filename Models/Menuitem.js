@@ -20,7 +20,11 @@ const menuitemSchema = new mongoose.Schema({
     },
     ingredients: {
         type: [String],
-        default: []
+        default: [],
+        validate: {
+            validator: arr => arr.every(i => typeof i === 'string' && i.length > 0),
+            message: 'Ingredients must be non-empty strings'
+        },
     },
     num_sales: {
         type: Number,

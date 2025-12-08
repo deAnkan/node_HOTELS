@@ -22,15 +22,37 @@ const logRequest = (req, res, next) => {
 app.use(logRequest);
 
 // Making the virfication function using passport
-app.use(new LocalStrategy(async(USERNAME, password, done) => {
+passport.use(
+    new LocalStrategy(async(USERNAME, password, done) => {
     // Authentication logic here
     try{
-        console.log('Recieved credentials:', USERNAME, password);
-        
-    }catch(err){
+        // console.log('Recieved credentials:', USERNAME, password);
 
+        const user = await Person.findOne({username:USERNAME});
+        if(!user)
+            return done (null,false,{message: 'Incorrect username.'});
+
+        const isPasswordMatch = user.comparePassword(password);
+        if(isPasswordMatch){
+            return done(null,user);
+        }
+        else{
+            return done(null,false,{message: 'Incorrect password.'});
+        }
+
+    }catch(err){
+        return done(err);
     }
-}));    
+})
+);    
+app.use(passport.initialize());
+
+const localAuthMiddleware = passport.authenticate('local', {session:false}); 
+app.get('/',localAuthMiddleware,(req,res)=>{
+    res.send(`Welcome ${req.user.name}, you have been authenticated successfully.`);    
+});
+
+// Home Route
 
 app.get('/', (req,res) =>{
     res.send('welcome to my hotel....how can i help you')
@@ -70,7 +92,7 @@ app.get('/person',async (req,res)=>{
 
 // POST method to add menu item
 
-app.post('/menu', async (req, res) => {
+app.post('/menuitem', async (req, res) => {
     try{
         const data = req.body;//assuming the request body contains the person data.
     
@@ -90,7 +112,7 @@ app.post('/menu', async (req, res) => {
 });  
 
 // GET method to get the menu items
-app.get('/menu',async (req,res)=>{
+app.get('/menuitem',async (req,res)=>{
     try{
         const data = await Menuitem.find();
         console.log('Data Fetched Successfully');
@@ -121,12 +143,12 @@ app.get('/person/:workType', async (req,res)=>{
 // Import the router file
 const personRoutes = require('./routes/personRoutes');
 // Use the router for person-related routes 
-app.use('/person', personRoutes);
+app.use('/person',localAuthMiddleware, personRoutes);
 
 // Import the menu router file
 const menuRoutes = require('./routes/menuRoutes');
 // Use the router for menu-related routes
-app.use('/menu', menuRoutes);
+app.use('/menuitem',localAuthMiddleware, menuRoutes);
 
 
 
