@@ -21,7 +21,16 @@ const logRequest = (req, res, next) => {
 }
 app.use(logRequest);
 
+// Making the virfication function using passport
+app.use(new LocalStrategy(async(USERNAME, password, done) => {
+    // Authentication logic here
+    try{
+        console.log('Recieved credentials:', USERNAME, password);
+        
+    }catch(err){
 
+    }
+}));    
 
 app.get('/', (req,res) =>{
     res.send('welcome to my hotel....how can i help you')
