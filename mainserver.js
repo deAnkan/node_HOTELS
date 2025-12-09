@@ -59,7 +59,7 @@ app.get('/', (req,res) =>{
 })
 
 // POST route to add a person
-app.post('/person', async (req, res) => {
+app.post('/person/signup', async (req, res) => {
     try{
         const data = req.body;//assuming the request body contains the person data.
     
@@ -143,7 +143,7 @@ app.get('/person/:workType', async (req,res)=>{
 // Import the router file
 const personRoutes = require('./routes/personRoutes');
 // Use the router for person-related routes 
-app.use('/person',localAuthMiddleware, personRoutes);
+app.use('/person/signup',localAuthMiddleware, personRoutes);
 
 // Import the menu router file
 const menuRoutes = require('./routes/menuRoutes');
