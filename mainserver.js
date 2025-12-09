@@ -32,7 +32,7 @@ passport.use(
         if(!user)
             return done (null,false,{message: 'Incorrect username.'});
 
-        const isPasswordMatch = user.comparePassword(password);
+        const isPasswordMatch =  await user.comparePassword(password);
         if(isPasswordMatch){
             return done(null,user);
         }
