@@ -143,12 +143,12 @@ app.get('/person/:workType', async (req,res)=>{
 // Import the router file
 const personRoutes = require('./routes/personRoutes');
 // Use the router for person-related routes 
-app.use('/person/signup',localAuthMiddleware, personRoutes);
+app.use('/person/signup', personRoutes);
 
 // Import the menu router file
 const menuRoutes = require('./routes/menuRoutes');
 // Use the router for menu-related routes
-app.use('/menuitem',localAuthMiddleware, menuRoutes);
+app.use('/menuitem', menuRoutes);
 
 
 
